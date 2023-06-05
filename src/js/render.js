@@ -81,11 +81,11 @@ export default {
     list.innerHTML = '';
 
     forEach(this.images, (image, index) => {
-      const { src } = image;
+      const { src, original } = image;
       const alt = image.alt || getImageNameFromURL(src);
       const url = this.getImageURL(image);
 
-      if (src || url) {
+      if (src || original || url) {
         const item = document.createElement('li');
         const img = document.createElement('img');
 
@@ -98,11 +98,11 @@ export default {
         });
 
         if (options.navbar) {
-          img.src = src || url;
+          img.src = src || original || url;
         }
 
         img.alt = alt;
-        img.setAttribute('data-original-url', url || src);
+        img.setAttribute('data-original-url', url || original || src);
         item.setAttribute('data-index', index);
         item.setAttribute('data-viewer-action', 'view');
         item.setAttribute('role', 'button');
